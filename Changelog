@@ -1,0 +1,11 @@
+
+// -- macro declarations: start reading with first headline
++BC:\B<\C<__body__>>
+
+// -- end of "preface"
+
+
+=0.01
+
+Initial public release. The modules were split off from the PerlPoint::Package distribution.
+
