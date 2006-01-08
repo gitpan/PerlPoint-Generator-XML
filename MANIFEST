@@ -9,3 +9,4 @@ lib/PerlPoint/Tags/XML.pm
 lib/PerlPoint/Generator/XML.pm
 lib/PerlPoint/Generator/XML/Default.pm
 
+META.yml                                 Module meta-data (added by MakeMaker)

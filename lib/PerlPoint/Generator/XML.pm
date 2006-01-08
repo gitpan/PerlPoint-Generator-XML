@@ -5,6 +5,7 @@
 # ---------------------------------------------------------------------------------------
 # version | date     | author   | changes
 # ---------------------------------------------------------------------------------------
+# 0.02    |01.01.2006| JSTENZEL | high bit characters are transformeds into entities now;
 # 0.01    |18.08.2003| JSTENZEL | new.
 # ---------------------------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ B<PerlPoint::Generator::XML> - generic XML generator
 
 =head1 VERSION
 
-This manual describes version B<0.01>.
+This manual describes version B<0.02>.
 
 =head1 SYNOPSIS
 
@@ -41,7 +42,7 @@ require 5.00503;
 package PerlPoint::Generator::XML;
 
 # declare package version
-$VERSION=0.01;
+$VERSION=0.02;
 $AUTHOR=$AUTHOR='J. Stenzel (perl@jochen-stenzel.de), 2003-2004';
 
 
@@ -183,14 +184,14 @@ sub new
   # prepare and add a pretty printing XML generator ...
   $plugin->{cfg}{xml}{pretty}=2 unless exists $plugin->{cfg}{xml}{pretty};
   $plugin->{xml}=new XML::Generator(
-                                    escape      => 'always',
+                                    escape      => 'always,high-bit',
                                     pretty      => $plugin->{cfg}{xml}{pretty},
                                     conformance => 'strict',
                                    );
 
   # and a second one for examples ... usually without pretty printing to keep the structure
   $plugin->{xmlplain}=new XML::Generator(
-                                         escape      => 'always',
+                                         escape      => 'always,high-bit',
                                          pretty      => $plugin->{cfg}{xml}{prettyPlain},
                                          conformance => 'strict',
                                         );

@@ -5,6 +5,9 @@
 # ---------------------------------------------------------------------------------------
 # version | date     | author   | changes
 # ---------------------------------------------------------------------------------------
+# 0.02    |19.11.2005| JSTENZEL | tags from PP::Tags::HTML are incorporated now as after
+#         |          |          | the release of the generator framework it required to
+#         |          |          | load the entire converters package for a few lines;
 # 0.01    |19.08.2003| JSTENZEL | new.
 # ---------------------------------------------------------------------------------------
 
@@ -92,7 +95,48 @@ use PerlPoint::Constants 0.14 qw(:tags);
 
 # declare tags - just combining other declarations
 use PerlPoint::Tags::Basic;
-use PerlPoint::Tags::HTML qw(L PAGEREF SECTIONREF U XREF SUP SUB);
+
+# L, PAGEREF, SECTIONREF, U, XREF, SUP and SUB are copied from PP::Tags::HTML by Lorenz
+# they could have been imported but this enforces the installation of the whole
+# converters package just for these lines, so I decided to duplicate the definitions
+%tags=(
+       L   => {
+               'options' => TAGS_MANDATORY,
+               'body'    => TAGS_MANDATORY,
+              },
+
+       PAGEREF => {
+                   'options' => TAGS_MANDATORY,
+                   'body'    => TAGS_DISABLED,
+                  },
+
+       SECTIONREF => {
+                      'options' => TAGS_MANDATORY,
+                      'body'    => TAGS_DISABLED,
+                     },
+
+       U   => {
+               'options' => TAGS_DISABLED,
+               'body'    => TAGS_MANDATORY,
+              },
+
+       XREF => {
+                'options' => TAGS_MANDATORY,
+                'body'    => TAGS_MANDATORY,
+               },
+
+       SUP => {
+               'options' => TAGS_DISABLED,
+               'body'    => TAGS_MANDATORY,
+              },
+
+       SUB => {
+               'options' => TAGS_DISABLED,
+               'body'    => TAGS_MANDATORY,
+              },
+
+       );
+
 
 1;
 
@@ -115,7 +159,9 @@ Basic tags imported by B<PerlPoint::Tags::XML>.
 
 =item PerlPoint::Tags::HTML
 
-which declares the original C<L>, C<PAGEREF>, C<SECTIONREF>, C<U> and C<XREF> tags.
+which declares the original C<L>, C<PAGEREF>, C<SECTIONREF>, C<U>, C<XREF>, C<SUP> and C<SUB> tags.
+(For now, these tags are copied to here for convenience of installation, but this might be changed
+back to an import in the future.)
 
 =back
 

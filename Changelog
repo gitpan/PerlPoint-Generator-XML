@@ -4,6 +4,10 @@
 
 // -- end of "preface"
 
+=0.02
+
+High bit characters are transformed into XML entities now.
+
 
 =0.01
 
