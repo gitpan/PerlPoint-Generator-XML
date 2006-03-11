@@ -4,6 +4,12 @@
 
 // -- end of "preface"
 
+=0.03
+
+* empty XML tags now produced as <tag></tag>, as Opera
+  and Firefox failed to handle <tag />;
+
+
 =0.02
 
 High bit characters are transformed into XML entities now.

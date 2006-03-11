@@ -5,6 +5,8 @@
 # ---------------------------------------------------------------------------------------
 # version | date     | author   | changes
 # ---------------------------------------------------------------------------------------
+# 0.03    |25.02.2006| JSTENZEL | empty XML tags now produced as <tag></tag>, as Opera
+#         |          |          | and Firefox failed to handle <tag />;
 # 0.02    |01.01.2006| JSTENZEL | high bit characters are transformeds into entities now;
 # 0.01    |18.08.2003| JSTENZEL | new.
 # ---------------------------------------------------------------------------------------
@@ -17,7 +19,7 @@ B<PerlPoint::Generator::XML> - generic XML generator
 
 =head1 VERSION
 
-This manual describes version B<0.02>.
+This manual describes version B<0.03>.
 
 =head1 SYNOPSIS
 
@@ -42,8 +44,8 @@ require 5.00503;
 package PerlPoint::Generator::XML;
 
 # declare package version
-$VERSION=0.02;
-$AUTHOR=$AUTHOR='J. Stenzel (perl@jochen-stenzel.de), 2003-2004';
+$VERSION=0.03;
+$AUTHOR=$AUTHOR='J. Stenzel (perl@jochen-stenzel.de), 2003-2006';
 
 
 
@@ -186,6 +188,7 @@ sub new
   $plugin->{xml}=new XML::Generator(
                                     escape      => 'always,high-bit',
                                     pretty      => $plugin->{cfg}{xml}{pretty},
+                                    empty       => 'close',
                                     conformance => 'strict',
                                    );
 
@@ -193,6 +196,7 @@ sub new
   $plugin->{xmlplain}=new XML::Generator(
                                          escape      => 'always,high-bit',
                                          pretty      => $plugin->{cfg}{xml}{prettyPlain},
+                                         empty       => 'close',
                                          conformance => 'strict',
                                         );
 
@@ -200,6 +204,7 @@ sub new
   $plugin->{xmlready}=new XML::Generator(
                                          escape      => 0,
                                          pretty      => $plugin->{cfg}{xml}{prettyPlain},
+                                         empty       => 'close',
                                          conformance => 'strict',
                                         );
 
