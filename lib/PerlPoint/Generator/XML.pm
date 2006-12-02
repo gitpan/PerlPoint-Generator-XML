@@ -5,6 +5,7 @@
 # ---------------------------------------------------------------------------------------
 # version | date     | author   | changes
 # ---------------------------------------------------------------------------------------
+# 0.04    |03.05.2006| JSTENZEL | added string2XMLObject();
 # 0.03    |25.02.2006| JSTENZEL | empty XML tags now produced as <tag></tag>, as Opera
 #         |          |          | and Firefox failed to handle <tag />;
 # 0.02    |01.01.2006| JSTENZEL | high bit characters are transformeds into entities now;
@@ -19,7 +20,7 @@ B<PerlPoint::Generator::XML> - generic XML generator
 
 =head1 VERSION
 
-This manual describes version B<0.03>.
+This manual describes version B<0.04>.
 
 =head1 SYNOPSIS
 
@@ -44,7 +45,7 @@ require 5.00503;
 package PerlPoint::Generator::XML;
 
 # declare package version
-$VERSION=0.03;
+$VERSION=0.04;
 $AUTHOR=$AUTHOR='J. Stenzel (perl@jochen-stenzel.de), 2003-2006';
 
 
@@ -1230,6 +1231,24 @@ sub elementName
 
   # provide the name of the XML element
   $xmltags{$name};
+ }
+
+
+# convert a plain string into an XML::Generator object
+# (the strings should contain valid XML)
+sub string2XMLObject
+ {
+  # get and check parameters
+  ((my __PACKAGE__ $me), my (@strings))=@_;
+  confess "[BUG] Missing object parameter.\n" unless $me;
+  confess "[BUG] Object parameter is no ", __PACKAGE__, " object.\n" unless ref $me and $me->isa(__PACKAGE__);
+  confess "[BUG] Missing strings parameter.\n" unless @strings;
+
+  # tranformation is done by a trick
+  my $dummytag="DUMMYTAG$$";
+  my $xmlobject=$me->{xmlready}->$dummytag(join('', @strings));
+  @$xmlobject=map {/^<\/?$dummytag>$/ ? () : $_} @$xmlobject;
+  $xmlobject;
  }
 
 

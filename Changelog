@@ -4,6 +4,12 @@
 
 // -- end of "preface"
 
+
+=0.04
+
+* new method string2XMLObject() to pass plain XML strings
+  on the stack (not intended for other strings);
+	
 =0.03
 
 * empty XML tags now produced as <tag></tag>, as Opera
